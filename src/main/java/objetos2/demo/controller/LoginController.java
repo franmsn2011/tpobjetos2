@@ -1,4 +1,4 @@
-package controllers;
+package objetos2.demo.controller;
 
 import java.util.ArrayList;
 
@@ -16,9 +16,9 @@ public class LoginController {
 	
 	
 	//@GetMapping("/index")
-	@GetMapping("/arranca")
+	@GetMapping("/index")
 	public String devolverformulario() {
-		return "indexx";
+		return "login";
 	}
 	@GetMapping("/")
 	public String holam() {
