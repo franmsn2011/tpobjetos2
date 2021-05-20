@@ -46,7 +46,12 @@ public class UsuarioController {
 	
 	@PostMapping("/seve")
 	public String create(@ModelAttribute("usuario") UsuarioModel usuarioModel) {
-		usuarioService.insertOrUpdate(usuarioModel);
+		try {
+			usuarioService.insertOrUpdate(usuarioModel);
+			
+		} catch (Exception e) {
+			return "redirect:/usuario/new";
+		}
 		return "redirect:/";
 	}
 	

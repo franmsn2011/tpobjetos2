@@ -7,8 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.excepcion.EquipoErrorDatosIguales;
+
 import objetos2.demo.converters.UsuarioConverter;
 import objetos2.demo.entities.Usuario;
+import objetos2.demo.exception.UsuarioExistenteException;
 import objetos2.demo.models.UsuarioModel;
 import objetos2.demo.repositories.IUsuarioRepository;
 import objetos2.demo.services.implementation.IUsuarioService;
@@ -32,8 +35,15 @@ public class UsuarioService implements IUsuarioService {
 
 	@Override
 	public UsuarioModel insertOrUpdate(UsuarioModel usuarioModel) {
-		Usuario usuario= usuarioRepository.save(usuarioConverter.modelToEntity(usuarioModel));
-		return usuarioConverter.entityToModel(usuario);
+		try {
+			Usuario usuario= usuarioRepository.save(usuarioConverter.modelToEntity(usuarioModel));
+			return usuarioConverter.entityToModel(usuario);
+		} catch (Exception e) {
+			throw new UsuarioExistenteException(
+					"No se puede agregar ese usuario porque ya hay un usuario con ese nombre");
+
+		}
+//		return usuarioConverter.entityToModel(usuario);
 	}
 
 	@Override
