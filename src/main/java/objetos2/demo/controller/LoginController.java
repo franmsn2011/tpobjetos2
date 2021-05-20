@@ -16,14 +16,11 @@ public class LoginController {
 	
 	
 	//@GetMapping("/index")
-	@GetMapping("/index")
+	@GetMapping("/")
 	public String devolverformulario() {
 		return "login";
 	}
-	@GetMapping("/")
-	public String holam() {
-		return "hola";
-	}
+	
 	/*
 	@GetMapping("/res")
 	public String traerPersonas(Model model) {
