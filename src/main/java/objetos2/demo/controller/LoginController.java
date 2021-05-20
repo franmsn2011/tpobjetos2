@@ -2,25 +2,44 @@ package objetos2.demo.controller;
 
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import objetos2.demo.entities.Usuario;
+import objetos2.demo.models.Login;
+import objetos2.demo.models.UsuarioModel;
+import objetos2.demo.services.UsuarioService;
 
 
 
 @Controller
 @RequestMapping("/login")
 public class LoginController {
-	
+	@Autowired
+	@Qualifier("usuarioService")
+	private UsuarioService usuarioService;
+
 	
 	//@GetMapping("/index")
 	@GetMapping("/")
-	public String devolverformulario() {
+	public String devolverformulario(Model model) {
+		model.addAttribute("login", new Login());
+		
 		return "login";
 	}
-	
+	@PostMapping("/resultado")
+	public String resultado(@ModelAttribute("login") Login login, Model model) {
+		UsuarioModel usuarioModel = usuarioService.findByNombre(login.getNombre());
+		//model.addAttribute("persona", persona);
+		return "redirect:/usuario/home";
+	}
 	/*
 	@GetMapping("/res")
 	public String traerPersonas(Model model) {

@@ -54,6 +54,11 @@ public class UsuarioController {
 		}
 		return "redirect:/";
 	}
+	@GetMapping("/home")
+	public String homeUsuario(Model model) {
+		model.addAttribute("usuario", new UsuarioModel());
+		return "homeUsuario";
+	}
 	
 /*
 	@GetMapping("/editar/{idJugador}")
