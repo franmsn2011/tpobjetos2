@@ -17,4 +17,5 @@ public interface  IUsuarioService {
 	public boolean remove(int id);
 	
 	public List<UsuarioModel> findByDegreeNombre(String degreeName);
+	public boolean validoPassword(UsuarioModel usuario,String password); 
 }

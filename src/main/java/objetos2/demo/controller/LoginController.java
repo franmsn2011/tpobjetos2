@@ -37,6 +37,15 @@ public class LoginController {
 	@PostMapping("/resultado")
 	public String resultado(@ModelAttribute("login") Login login, Model model) {
 		UsuarioModel usuarioModel = usuarioService.findByNombre(login.getNombre());
+		if(usuarioModel==null) {
+			model.addAttribute("exception", "Error no existe un usuario con ese nombre");
+			return "login";
+		}
+		if(usuarioService.validoPassword(usuarioModel, login.getPassword())) {
+			model.addAttribute("exception", "Contraseña incorrecta intente otra vez");
+			return "login";
+		} 
+		
 		//model.addAttribute("persona", persona);
 		return "redirect:/usuario/home";
 	}

@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.excepcion.EquipoErrorDatosIguales;
 
 import objetos2.demo.converters.UsuarioConverter;
 import objetos2.demo.entities.Usuario;
@@ -58,12 +57,16 @@ public class UsuarioService implements IUsuarioService {
 
 	@Override
 	public UsuarioModel findById(int id) {
-		return usuarioConverter.entityToModel(usuarioRepository.findById(id));
+		return usuarioConverter.entityToModel(usuarioRepository.findByIdUsuario(id));
 	}
 
 	@Override
 	public UsuarioModel findByNombre(String name) {
-		return usuarioConverter.entityToModel(usuarioRepository.findByNombre(name));
+		UsuarioModel u= null;
+		if(usuarioRepository.findByNombre(name)!=null){
+			u=usuarioConverter.entityToModel(usuarioRepository.findByNombre(name));
+		}
+		return u;
 	}
 	
 	@Override
@@ -71,5 +74,9 @@ public class UsuarioService implements IUsuarioService {
 		List<UsuarioModel> models = new ArrayList<UsuarioModel>();
 		
 		return models;
+	}
+	@Override
+	public boolean validoPassword(UsuarioModel usuario,String password) {
+		return usuario.getPassword().equalsIgnoreCase(password);
 	}
 }
