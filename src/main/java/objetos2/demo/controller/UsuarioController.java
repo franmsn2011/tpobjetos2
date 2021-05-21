@@ -54,9 +54,9 @@ public class UsuarioController {
 		}
 		return "redirect:/";
 	}
-	@GetMapping("/home")
-	public String homeUsuario(Model model) {
-		model.addAttribute("usuario", new UsuarioModel());
+	@GetMapping("/home/{idUsuario}")
+	public String homeUsuario(@ModelAttribute("idUsuario") int idUsuario,Model model) {
+		model.addAttribute("usuario", usuarioService.findById(idUsuario));
 		return "homeUsuario";
 	}
 	

@@ -46,8 +46,8 @@ public class LoginController {
 			return "login";
 		} 
 		
-		//model.addAttribute("persona", persona);
-		return "redirect:/usuario/home";
+		model.addAttribute("usuario", usuarioModel);
+		return "redirect:/usuario/home/"+usuarioModel.getIdUsuario();
 	}
 	/*
 	@GetMapping("/res")
