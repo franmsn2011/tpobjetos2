@@ -18,14 +18,14 @@ public class UsuarioModel {
 	
 	private String password;
 	
-	private String tipoUsuario;
+	private int tipoUsuario;
 	
 	private boolean activo;
 	
 	public UsuarioModel() {}
 
 	public UsuarioModel(int idUsuario, String nombre, String apellido,int edad, int tipoDoc, int nroDocumento, String password,
-			boolean activo,String tipoUsuario) {
+			boolean activo,int tipoUsuario) {
 		super();
 		this.idUsuario = idUsuario;
 		this.nombre = nombre;
@@ -49,12 +49,12 @@ public class UsuarioModel {
 	}
 
 
-	public String getTipoUsuario() {
+	public int getTipoUsuario() {
 		return tipoUsuario;
 	}
 
 
-	public void setTipoUsuario(String tipoUsuario) {
+	public void setTipoUsuario(int tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
 	}
 

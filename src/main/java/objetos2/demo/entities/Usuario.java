@@ -36,7 +36,7 @@ public class Usuario {
 	private String password;
 	
 	@Column(name="tipoUsuario")
-	private String tipoUsuario;
+	private int tipoUsuario;
 	
 	@Column(name="activo")
 	private boolean activo;
@@ -46,7 +46,7 @@ public class Usuario {
 
 
 	public Usuario(int idUsuario, String nombre, String apellido, int edad, int tipoDoc, int nroDocumento, String password,
-			boolean activo,String tipoUsuario) {
+			boolean activo,int tipoUsuario) {
 		super();
 		this.idUsuario = idUsuario;
 		this.nombre = nombre;
@@ -70,12 +70,12 @@ public class Usuario {
 	}
 
 
-	public String getTipoUsuario() {
+	public int getTipoUsuario() {
 		return tipoUsuario;
 	}
 
 
-	public void setTipoUsuario(String tipoUsuario) {
+	public void setTipoUsuario(int tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
 	}
 
