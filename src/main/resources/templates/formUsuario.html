@@ -18,7 +18,7 @@
 	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 	crossorigin="anonymous">
   </script>
-
+<script src="/jQuery/usuario.js"></script>
 <title>Formulario de usuario</title>
  <link id="contextPathHolder" th:href="@{__${#httpServletRequest.requestURI}__}"/>
  <script id="ruta" th:inline="javascript"> var contextRoot = /*[[@{/}]]*/ ''; </script>
@@ -86,16 +86,15 @@
 							</div>
 						</div>
 						
-						<div class=" mb-3 row form-group">
-							<label class="col-sm-3 col-form-label" for="idEstado">Tipo de Usuario</label>
+						<div class="mb-3 row form-group"  >
+							<label for="idPerfil" class="col-sm-3 col-form-label">Perfil</label>
 							<div class="col-sm-9">
-								 <select id="idTipoUsuario" th:field="*{tipoUsuario}"
+								<select id="idPerfil" type="number" th:field="*{tipoUsuario}"
 									class="form-select form-select-lg mb-3 ">
-									<option value="admin">admin</option>
-									<option value="nomal">normal</option>
-									
-								</select>										
+								</select>
 							</div>
+							<input  th:field="*{tipoUsuario}" type="number" class="form-control d-none"
+									id="idPerfi">
 						</div>
 						
 						
