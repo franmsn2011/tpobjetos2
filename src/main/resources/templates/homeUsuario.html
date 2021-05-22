@@ -30,7 +30,13 @@
 		<h2>Bienvenido <span th:text="${usuario.nombre}"> a ingresado</span> </h2>
 		<h3 id="idPerfil" th:text="${usuario.tipoUsuario}"> a</h3>
 		<div id="idEsAdmin">
-			
+			<a th:href="@{/perfil/list}" class="btn btn-primary" id="id1">lista de perfiles</a> 
+			<br />
+		<a th:href="@{/usuario/list}"class="btn btn-primary">lista de Usuarios</a>
+		<br />
+		<a th:href="@{/perfil/new/}" class="btn btn-info">agregar perfil nuevo</a>
+	<br />
+	<a th:href="@{/usuario/new/}" class="btn btn-info">agregar usuario nuevo</a>
 		</div>
 		<!-- <a th:href="@{/posicion/list}" class="btn btn-primary" id="id1">lista
 			de posiciones</a> --> 
