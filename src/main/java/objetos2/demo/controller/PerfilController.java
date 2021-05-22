@@ -39,18 +39,21 @@ public class PerfilController {
 	@GetMapping("/new")
 	public String create(Model model) {
 		model.addAttribute("perfil", new PerfilModel());
+		model.addAttribute("segunda", false);
 		return "formPerfil";
 	}
 	
 	@PostMapping("/seve")
-	public String create(@ModelAttribute("perfil") PerfilModel perfilModel) {
+	public String create(@ModelAttribute("perfil") PerfilModel perfilModel,Model model) {
 		try {
 			perfilService.insertOrUpdate(perfilModel);
 			
 		} catch (Exception e) {
 			return "redirect:/perfil/new";
 		}
-		return "redirect:/";
+		model.addAttribute("confirmacion", "Operacion sobre el perfil exitosa");
+		model.addAttribute("segunda", true);
+		return "formPerfil";
 	}
 	@GetMapping("/home/{idPerfil}")
 	public String homePerfil(@ModelAttribute("idPerfil") int idPerfil,Model model) {

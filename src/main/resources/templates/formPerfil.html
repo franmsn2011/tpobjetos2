@@ -18,7 +18,7 @@
 	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 	crossorigin="anonymous">
   </script>
-
+<script src="/jQuery/funciones.js"></script>
 <title>Formulario de Perfil</title>
  <link id="contextPathHolder" th:href="@{__${#httpServletRequest.requestURI}__}"/>
  <script id="ruta" th:inline="javascript"> var contextRoot = /*[[@{/}]]*/ ''; </script>
@@ -30,7 +30,8 @@
 				<div class="card">
 					<div class="card-header">
 						<h3>Perfil</h3>
-						<h4 class="text-danger" id="idExc"th:text="${exception}"></h4>
+						<h4 class="text-success" id="idConfirmacion"th:text="${confirmacion}"></h4>
+				
 					</div>
 					<div class="card-body">
 						<div class="mb-3 row form-group">
@@ -62,6 +63,13 @@
 			</form>
 		</div>
 	</div>
-<a href="#" id="backLink" class="btn btn-success" >Atras</a>
+	<div th:if="${segunda}">
+		<a href="#" id="backLink2" class="btn btn-success" >Atras</a>
+	</div>	
+	<div th:unless="${segunda}">
+		<a href="#" id="backLink" class="btn btn-success" >Atras</a>
+	</div>
+	
+<!--<a href="#" id="backLink2" class="btn btn-success" >Atras</a>  -->	
 </body>
 </html>
