@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import objetos2.demo.models.PerfilModel;
+import objetos2.demo.models.UsuarioModel;
 import objetos2.demo.services.PerfilService;
 
 @Controller
@@ -56,10 +57,24 @@ public class PerfilController {
 		model.addAttribute("perfil", perfilService.findById(idPerfil));
 		return "homePerfil";
 	}
-	@GetMapping("/list" )
-	public ModelAndView listAllPerfil() {
+	
+	@GetMapping("/list")
+	public ModelAndView listAllJugador() {
 		ModelAndView mav = new ModelAndView("listPerfil");
 		mav.addObject("perfiles", perfilService.getAll());
 		return mav;
+	}
+
+	@GetMapping("/editar/{idPerfil}")
+	public String editar(@ModelAttribute("idPerfil") int idPerfil, Model model) {
+		PerfilModel perfil= perfilService.findById(idPerfil);
+		model.addAttribute("perfil",perfil);
+		return "formPerfil";
+	}
+	
+	@GetMapping("/eliminar/{idPerfil}")
+	public String delete(@ModelAttribute("idPerfil") int idPerfil, Model model) {
+		perfilService.remove(idPerfil);
+		return "redirect:/perfil/list";
 	}
 }

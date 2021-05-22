@@ -19,6 +19,7 @@
 	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 	crossorigin="anonymous">
   </script>
+<script src="/jQuery/usuario-home.js"></script>
 </head>
 <body
 	background="https://i.pinimg.com/originals/79/45/7f/79457fd4cbc0a6ff4b0542ac700cb4d1.jpg">
@@ -27,6 +28,10 @@
 
 		<h1 class="display-1 bg-primary">Home Usuario</h1>
 		<h2>Bienvenido <span th:text="${usuario.nombre}"> a ingresado</span> </h2>
+		<h3 id="idPerfil" th:text="${usuario.tipoUsuario}"> a</h3>
+		<div id="idEsAdmin">
+			
+		</div>
 		<!-- <a th:href="@{/posicion/list}" class="btn btn-primary" id="id1">lista
 			de posiciones</a> --> 
 	</div>

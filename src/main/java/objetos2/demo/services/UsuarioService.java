@@ -88,6 +88,6 @@ public class UsuarioService implements IUsuarioService {
 	}
 	@Override
 	public boolean validoPassword(UsuarioModel usuario,String password) {
-		return usuario.getPassword().equalsIgnoreCase(password);
+		return !usuario.getPassword().equalsIgnoreCase(password);
 	}
 }
