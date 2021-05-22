@@ -54,6 +54,17 @@ public class UsuarioService implements IUsuarioService {
 			return false;
 		}
 	}
+	@Override
+	public boolean darDeBaja(int idUsuario) {
+		try {
+			Usuario u= usuarioRepository.findByIdUsuario(idUsuario);
+			u.setActivo(false);
+			insertOrUpdate(usuarioConverter.entityToModel(u));
+			return true;
+		}catch (Exception e) {
+			return false;
+		}
+	}
 
 	@Override
 	public UsuarioModel findById(int id) {

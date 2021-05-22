@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import objetos2.demo.models.UsuarioModel;
 import objetos2.demo.services.UsuarioService;
@@ -59,21 +60,28 @@ public class UsuarioController {
 		model.addAttribute("usuario", usuarioService.findById(idUsuario));
 		return "homeUsuario";
 	}
+	@GetMapping("/list")
+	public ModelAndView listAllJugador() {
+		ModelAndView mav = new ModelAndView("listUsuario");
+		mav.addObject("usuarios", usuarioService.getAll());
+		//mav.addObject("posicion", posicionService);
+		return mav;
+	}
 	
-/*
-	@GetMapping("/editar/{idJugador}")
-	public String editar(@PathVariable int idJugador, Model model) {
-		Optional<Jugador> jugador = UsuarioService.listarId(idJugador);
-		model.addAttribute(JUGADOR_KEY, jugador);
-		return "formJugador";
-	}
 
-	@GetMapping("/eliminar/{idJugador}")
-	public String delete(Model model, @PathVariable int idJugador) {
-		UsuarioService.delete(idJugador);
-		return "redirect:/jugador/list";
+	@GetMapping("/editar/{idUsuario}")
+	public String editar(@ModelAttribute("idUsuario") int idUsuario, Model model) {
+		UsuarioModel usuario= usuarioService.findById(idUsuario);
+		model.addAttribute("usuario", usuario);
+		return "formUsuario";
 	}
-
+	
+	@GetMapping("/eliminar/{idUsuario}")
+	public String delete(@ModelAttribute("idUsuario") int idUsuario, Model model) {
+		usuarioService.darDeBaja(idUsuario);
+		return "redirect:/usuario/list";
+	}
+	/*
 	@GetMapping("/traerJEP")
 	public String agegar2(Model model) {
 		model.addAttribute(JUGADOR_KEY, new Jugador());

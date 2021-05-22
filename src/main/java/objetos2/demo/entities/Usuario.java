@@ -58,7 +58,19 @@ public class Usuario {
 		this.activo = activo;
 		this.tipoUsuario = tipoUsuario;
 	}
-
+	public Usuario(int idUsuario, String nombre, String apellido, int edad, int tipoDoc, int nroDocumento, String password,
+			int tipoUsuario) {
+		super();
+		this.idUsuario = idUsuario;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.edad = edad;
+		this.tipoDoc = tipoDoc;
+		this.nroDocumento = nroDocumento;
+		this.password = password;
+		this.activo = true;
+		this.tipoUsuario = tipoUsuario;
+	}
 	
 	public int getEdad() {
 		return edad;
