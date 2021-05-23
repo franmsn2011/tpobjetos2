@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +29,8 @@ public class LoginController {
 
 	
 	//@GetMapping("/index")
+
+	//@PreAuthorize("hasRole('ROLE_ADMIN')")  // a modificar según rol de Administrador o Audotor
 	@GetMapping("/")
 	public String devolverformulario(Model model) {
 		model.addAttribute("login", new Login());
