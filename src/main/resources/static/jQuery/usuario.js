@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	var CONTEXT_PATH = $('#contextPathHolder').attr('href');
 	var contador=CONTEXT_PATH.split("/");
-	var uurle="/perfi";
+	var uurle="perfi";
 	var i=0;
 	for(i=0;i<contador.length-2;i++){
 		uurle="../"+uurle;
