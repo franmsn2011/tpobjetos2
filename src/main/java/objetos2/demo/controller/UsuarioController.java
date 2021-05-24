@@ -1,7 +1,11 @@
 package objetos2.demo.controller;
 
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import objetos2.demo.entities.Usuario;
 import objetos2.demo.models.UsuarioModel;
 import objetos2.demo.services.UsuarioService;
 
@@ -66,7 +71,10 @@ public class UsuarioController {
 	}
 	@GetMapping("/index")
 	public String indexUsuario(/*@ModelAttribute("idUsuario") int idUsuario,*/Model model) {
-		//model.addAttribute("usuario", usuarioService.findById(idUsuario));
+		//HashMap<String, String>	has= SecurityContextHolder.getContext().getAuthentication().getPrincipal().getClass();
+		User usuario = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		//usuario.get
+		//model.addAttribute("usuario", usuario);
 		return "homeUsuario";
 	}
 	@GetMapping("/list")

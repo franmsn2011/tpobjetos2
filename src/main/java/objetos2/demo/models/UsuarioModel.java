@@ -34,7 +34,7 @@ public class UsuarioModel {
 	public UsuarioModel() {}
 	
 	public UsuarioModel(int idUsuario,String nombreUsuario,
-			@Size(min = 3, max = 12) String nombre, @Size(min = 3, max = 12) String apellido, int tipoDocumento,
+			String nombre, String apellido, int tipoDocumento,
 			int nroDocumento, String email, String password, int tipoUsuario, boolean activo, Perfil perfil) {
 		super();
 		this.idUsuario = idUsuario;
