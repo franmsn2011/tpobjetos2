@@ -1,14 +1,23 @@
 package objetos2.demo.services;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-
 import objetos2.demo.converters.UsuarioConverter;
+import objetos2.demo.entities.Perfil;
+import objetos2.demo.entities.UserRole;
 import objetos2.demo.entities.Usuario;
 import objetos2.demo.exception.UsuarioExistenteException;
 import objetos2.demo.models.UsuarioModel;
@@ -17,7 +26,7 @@ import objetos2.demo.services.implementation.IUsuarioService;
 
 
 @Service("usuarioService")
-public class UsuarioService implements IUsuarioService {
+public class UsuarioService implements IUsuarioService ,UserDetailsService{
 
 	@Autowired
 	@Qualifier("usuarioRepository")
@@ -30,6 +39,25 @@ public class UsuarioService implements IUsuarioService {
 	@Override
 	public List<Usuario> getAll() {
 		return usuarioRepository.findAll();
+	}
+	@Override
+	public UserDetails loadUserByNombreUsuario(String nombreUsuario) throws UsernameNotFoundException {
+		objetos2.demo.entities.Usuario user = usuarioRepository.findByNombreUsuarioAndFetchPerfilEagerly(nombreUsuario);
+		return buildUser(user, buildGrantedAuthorities(user.getPerfil()));
+	}
+	
+	private User buildUser(objetos2.demo.entities.Usuario user, List<GrantedAuthority> grantedAuthorities) {
+		return new User(user.getNombreUsuario(), user.getPassword(), user.isActivo(),
+						true, true, true, //accountNonExpired, credentialsNonExpired, accountNonLocked,
+						grantedAuthorities);
+	}
+	
+	private List<GrantedAuthority> buildGrantedAuthorities(Perfil perfil) {
+		Set<GrantedAuthority> grantedAuthorities = new HashSet<GrantedAuthority>();
+		
+			grantedAuthorities.add(new SimpleGrantedAuthority(perfil.getPerfil()));
+		
+		return new ArrayList<GrantedAuthority>(grantedAuthorities);
 	}
 
 	@Override

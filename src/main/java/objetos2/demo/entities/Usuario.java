@@ -1,36 +1,46 @@
 package objetos2.demo.entities;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 
 
 @Entity
-@Table(name="usuario")
+@Table(name="usuario", uniqueConstraints=@UniqueConstraint(columnNames= {"role", "user_id"}))
 public class Usuario {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idUsuario;
 	
-	@Column(name="nombre", unique=true, nullable=false, length=45)
+	@Column(name="nombreUsuario", unique=true, nullable=false, length=45)
+	private String nombreUsuario;
+	
+	@Column(name="nombre")
 	private String nombre;
 	
 	@Column(name="apellido")
 	private String apellido;
 	
-	@Column(name="edad")
-	private int edad;
 	
-	@Column(name="tipoDoc")
-	private int tipoDoc;
+	@Column(name="tipoDocumento")
+	private int tipoDocumento;
 	
 	@Column(name="nroDocumento")
 	private int nroDocumento;
+	
+	@Column(name="email")
+	private String email;
 	
 	@Column(name="password")
 	private String password;
@@ -41,45 +51,109 @@ public class Usuario {
 	@Column(name="activo")
 	private boolean activo;
 	
+	@Column(name="createdat")
+	@CreationTimestamp
+	private LocalDateTime createdAt;
+	
+	@Column(name="updatedat")
+	@UpdateTimestamp
+	private LocalDateTime updatedAt;
+	
+	@Column(name="perfil", nullable=false, length=100)
+	private Perfil perfil;
 
 	public Usuario() {}
 
-
-	public Usuario(int idUsuario, String nombre, String apellido, int edad, int tipoDoc, int nroDocumento, String password,
-			boolean activo,int tipoUsuario) {
-		super();
-		this.idUsuario = idUsuario;
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.edad = edad;
-		this.tipoDoc = tipoDoc;
-		this.nroDocumento = nroDocumento;
-		this.password = password;
-		this.activo = activo;
-		this.tipoUsuario = tipoUsuario;
-	}
-	public Usuario(int idUsuario, String nombre, String apellido, int edad, int tipoDoc, int nroDocumento, String password,
-			int tipoUsuario) {
-		super();
-		this.idUsuario = idUsuario;
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.edad = edad;
-		this.tipoDoc = tipoDoc;
-		this.nroDocumento = nroDocumento;
-		this.password = password;
-		this.activo = true;
-		this.tipoUsuario = tipoUsuario;
-	}
 	
-	public int getEdad() {
-		return edad;
+
+	public Usuario(int idUsuario, String nombreUsuario, String nombre, String apellido, int tipoDocumento,
+			int nroDocumento, String email, String password, int tipoUsuario, boolean activo, Perfil perfil) {
+		super();
+		this.idUsuario = idUsuario;
+		this.nombreUsuario = nombreUsuario;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.tipoDocumento = tipoDocumento;
+		this.nroDocumento = nroDocumento;
+		this.email = email;
+		this.password = password;
+		this.tipoUsuario = tipoUsuario;
+		this.activo = activo;
+		this.perfil = perfil;
 	}
 
 
-	public void setEdad(int edad) {
-		this.edad = edad;
+
+	public String getNombreUsuario() {
+		return nombreUsuario;
 	}
+
+
+
+	public void setNombreUsuario(String nombreUsuario) {
+		this.nombreUsuario = nombreUsuario;
+	}
+
+
+
+	public int getTipoDocumento() {
+		return tipoDocumento;
+	}
+
+
+
+	public void setTipoDocumento(int tipoDocumento) {
+		this.tipoDocumento = tipoDocumento;
+	}
+
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
+
+
+
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
+
+
+
+	public LocalDateTime getUpdatedAt() {
+		return updatedAt;
+	}
+
+
+
+	public void setUpdatedAt(LocalDateTime updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
+
+
+	public Perfil getPerfil() {
+		return perfil;
+	}
+
+
+
+	public void setPerfil(Perfil perfil) {
+		this.perfil = perfil;
+	}
+
 
 
 	public int getTipoUsuario() {
@@ -121,15 +195,6 @@ public class Usuario {
 		this.apellido = apellido;
 	}
 
-
-	public int getTipoDoc() {
-		return tipoDoc;
-	}
-
-
-	public void setTipoDoc(int tipoDoc) {
-		this.tipoDoc = tipoDoc;
-	}
 
 
 	public int getNroDocumento() {
