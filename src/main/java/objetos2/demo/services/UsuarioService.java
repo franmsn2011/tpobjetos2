@@ -17,20 +17,23 @@ import org.springframework.stereotype.Service;
 
 import objetos2.demo.converters.UsuarioConverter;
 import objetos2.demo.entities.Perfil;
-import objetos2.demo.entities.UserRole;
 import objetos2.demo.entities.Usuario;
 import objetos2.demo.exception.UsuarioExistenteException;
 import objetos2.demo.models.UsuarioModel;
+import objetos2.demo.repositories.IPerfilRepository;
 import objetos2.demo.repositories.IUsuarioRepository;
 import objetos2.demo.services.implementation.IUsuarioService;
 
 
 @Service("usuarioService")
-public class UsuarioService implements IUsuarioService ,UserDetailsService{
+public class UsuarioService implements IUsuarioService ,UserDetailsService {
 
 	@Autowired
 	@Qualifier("usuarioRepository")
 	private IUsuarioRepository usuarioRepository;
+	@Autowired
+	@Qualifier("perfilRepository")
+	private IPerfilRepository perfilRepository;
 	
 	@Autowired
 	@Qualifier("usuarioConverter")
@@ -41,11 +44,11 @@ public class UsuarioService implements IUsuarioService ,UserDetailsService{
 		return usuarioRepository.findAll();
 	}
 	@Override
-	public UserDetails loadUserByNombreUsuario(String nombreUsuario) throws UsernameNotFoundException {
-		objetos2.demo.entities.Usuario user = usuarioRepository.findByNombreUsuarioAndFetchPerfilEagerly(nombreUsuario);
+	public UserDetails loadUserByUsername(String nombreUsuario) throws UsernameNotFoundException {
+		objetos2.demo.entities.Usuario user = usuarioRepository.findByNombreUsuario(nombreUsuario);
+		user.setPerfil(perfilRepository.findByIdPerfil(user.getPerfil().getIdPerfil()));
 		return buildUser(user, buildGrantedAuthorities(user.getPerfil()));
 	}
-	
 	private User buildUser(objetos2.demo.entities.Usuario user, List<GrantedAuthority> grantedAuthorities) {
 		return new User(user.getNombreUsuario(), user.getPassword(), user.isActivo(),
 						true, true, true, //accountNonExpired, credentialsNonExpired, accountNonLocked,
@@ -55,7 +58,7 @@ public class UsuarioService implements IUsuarioService ,UserDetailsService{
 	private List<GrantedAuthority> buildGrantedAuthorities(Perfil perfil) {
 		Set<GrantedAuthority> grantedAuthorities = new HashSet<GrantedAuthority>();
 		
-			grantedAuthorities.add(new SimpleGrantedAuthority(perfil.getPerfil()));
+			grantedAuthorities.add(new SimpleGrantedAuthority(perfil.getNombrePerfil()));
 		
 		return new ArrayList<GrantedAuthority>(grantedAuthorities);
 	}
@@ -100,10 +103,10 @@ public class UsuarioService implements IUsuarioService ,UserDetailsService{
 	}
 
 	@Override
-	public UsuarioModel findByNombre(String name) {
+	public UsuarioModel findByNombreUsuario(String name) {
 		UsuarioModel u= null;
-		if(usuarioRepository.findByNombre(name)!=null){
-			u=usuarioConverter.entityToModel(usuarioRepository.findByNombre(name));
+		if(usuarioRepository.findByNombreUsuario(name)!=null){
+			u=usuarioConverter.entityToModel(usuarioRepository.findByNombreUsuario(name));
 		}
 		return u;
 	}

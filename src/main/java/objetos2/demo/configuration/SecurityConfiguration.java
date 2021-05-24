@@ -10,7 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import objetos2.demo.services.implementation.UserService;
+import objetos2.demo.services.UsuarioService;
 
 @Configuration
 @EnableWebSecurity
@@ -18,25 +18,25 @@ import objetos2.demo.services.implementation.UserService;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-	@Qualifier("userService")
-	private UserService userService;
+	@Qualifier("usuarioService")
+	private UsuarioService usuarioService;
 	
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userService).passwordEncoder(new BCryptPasswordEncoder());
+		auth.userDetailsService(usuarioService).passwordEncoder(new BCryptPasswordEncoder());
 	}
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-				.antMatchers("/css/*", "/imgs/*", "/js/*", "/vendor/bootstrap/css/*", "/vendor/jquery/*", "/vendor/bootstrap/js/*").permitAll()
+				.antMatchers("/css/*", "/jQuery/*").permitAll()
 				.anyRequest().authenticated()
 			.and()
-				.formLogin().loginPage("/login").loginProcessingUrl("/loginprocess")
-				.usernameParameter("username").passwordParameter("password")
-				.defaultSuccessUrl("/loginsuccess").permitAll()
+				.formLogin().loginPage("/usuario/login").loginProcessingUrl("/usuario/loginprocess")
+				.usernameParameter("nombreUsuario").passwordParameter("password")
+				.defaultSuccessUrl("/usuario/loginsuccess").permitAll()
 			.and()
-				.logout().logoutUrl("/logout").logoutSuccessUrl("/logout").permitAll();
+				.logout().logoutUrl("/usuario/logout").logoutSuccessUrl("/usuario/logout").permitAll();
 	}
 }
 

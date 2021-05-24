@@ -29,14 +29,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-				.antMatchers("/css/*", "/imgs/*", "/js/*", "/vendor/bootstrap/css/*", "/vendor/jquery/*", "/vendor/bootstrap/js/*").permitAll()
+				.antMatchers("/css/*", "/jQuery/*").permitAll()
 				.anyRequest().authenticated()
 			.and()
-				.formLogin().loginPage("/login").loginProcessingUrl("/loginprocess")
-				.usernameParameter("username").passwordParameter("password")
-				.defaultSuccessUrl("/loginsuccess").permitAll()
+				.formLogin().loginPage("/usuario/login").loginProcessingUrl("/usuario/loginprocess")
+				.usernameParameter("nombreUsuario").passwordParameter("password")
+				.defaultSuccessUrl("/usuario/loginsuccess").permitAll()
 			.and()
-				.logout().logoutUrl("/logout").logoutSuccessUrl("/logout").permitAll();
+				.logout().logoutUrl("/usuario/logout").logoutSuccessUrl("/usuario/logout").permitAll();
 	}
 }
 

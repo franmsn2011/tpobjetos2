@@ -1,13 +1,14 @@
 package objetos2.demo.models;
 
-public class Login {
+public class LoginModel {
 	private String nombre;
 	private String password;
 	
-	public Login() {
-		super();
-	}
-	public Login(String nombre, String password) {
+	public LoginModel() {
+		super();}
+	
+	
+	public LoginModel(String nombre, String password) {
 		super();
 		this.nombre = nombre;
 		this.password = password;

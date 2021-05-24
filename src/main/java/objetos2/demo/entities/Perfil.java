@@ -24,8 +24,8 @@ public class Perfil {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idPerfil;
 	
-	@Column(name="perfil")
-	private String perfil;
+	@Column(name="nombrePerfil")
+	private String nombrePerfil;
 	
 	@Column(name="createdat")
 	@CreationTimestamp
@@ -40,11 +40,10 @@ public class Perfil {
 
 	
 
-	public Perfil(int idPerfil, String perfil, Set<Usuario> usuarios) {
+	public Perfil(int idPerfil, String nombrePerfil) {
 		super();
 		this.idPerfil = idPerfil;
-		this.perfil = perfil;
-		this.usuarios = usuarios;
+		this.nombrePerfil = nombrePerfil;
 	}
 
 
@@ -55,14 +54,13 @@ public class Perfil {
 		return idPerfil;
 	}
 
-
-	public String getPerfil() {
-		return perfil;
+	public String getNombrePerfil() {
+		return nombrePerfil;
 	}
 
 
-	public void setPerfil(String perfil) {
-		this.perfil = perfil;
+	public void setNombrePerfil(String nombrePerfil) {
+		this.nombrePerfil = nombrePerfil;
 	}
 
 
@@ -101,14 +99,12 @@ public class Perfil {
 	}
 
 
-	public Perfil(int idPerfil, String perfil, LocalDateTime createdAt, LocalDateTime updatedAt,
-			Set<Usuario> usuarios) {
+	public Perfil(int idPerfil, String nombrePerfil, LocalDateTime createdAt, LocalDateTime updatedAt) {
 		super();
 		this.idPerfil = idPerfil;
-		this.perfil = perfil;
+		this.nombrePerfil = nombrePerfil;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
-		this.usuarios = usuarios;
 	}
 
 

@@ -1,20 +1,27 @@
 package objetos2.demo.models;
 
+import javax.validation.constraints.Size;
 
+import objetos2.demo.entities.Perfil;
 
 public class UsuarioModel {
 
 	private int idUsuario;
 	
+	@Size(min=3, max=12)
+	private String nombreUsuario;
+	
+	@Size(min=3, max=12)
 	private String nombre;
 	
+	@Size(min=3, max=12)
 	private String apellido;
 	
-	private int edad;
-	
-	private int tipoDoc;
+	private int tipoDocumento;
 	
 	private int nroDocumento;
+	
+	private String email;
 	
 	private String password;
 	
@@ -22,30 +29,25 @@ public class UsuarioModel {
 	
 	private boolean activo;
 	
+	private Perfil perfil; 
+	
 	public UsuarioModel() {}
-
-	public UsuarioModel(int idUsuario, String nombre, String apellido,int edad, int tipoDoc, int nroDocumento, String password,
-			boolean activo,int tipoUsuario) {
+	
+	public UsuarioModel(int idUsuario,String nombreUsuario,
+			@Size(min = 3, max = 12) String nombre, @Size(min = 3, max = 12) String apellido, int tipoDocumento,
+			int nroDocumento, String email, String password, int tipoUsuario, boolean activo, Perfil perfil) {
 		super();
 		this.idUsuario = idUsuario;
+		this.nombreUsuario = nombreUsuario;
 		this.nombre = nombre;
 		this.apellido = apellido;
-		this.edad = edad;
-		this.tipoDoc = tipoDoc;
+		this.tipoDocumento = tipoDocumento;
 		this.nroDocumento = nroDocumento;
+		this.email = email;
 		this.password = password;
-		this.activo = activo;
 		this.tipoUsuario = tipoUsuario;
-	}
-
-	
-	public int getEdad() {
-		return edad;
-	}
-
-
-	public void setEdad(int edad) {
-		this.edad = edad;
+		this.activo = activo;
+		this.perfil = perfil;
 	}
 
 
@@ -89,16 +91,6 @@ public class UsuarioModel {
 	}
 
 
-	public int getTipoDoc() {
-		return tipoDoc;
-	}
-
-
-	public void setTipoDoc(int tipoDoc) {
-		this.tipoDoc = tipoDoc;
-	}
-
-
 	public int getNroDocumento() {
 		return nroDocumento;
 	}
@@ -127,4 +119,37 @@ public class UsuarioModel {
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
+
+	public String getNombreUsuario() {
+		return nombreUsuario;
+	}
+
+	public void setNombreUsuario(String nombreUsuario) {
+		this.nombreUsuario = nombreUsuario;
+	}
+
+	public int getTipoDocumento() {
+		return tipoDocumento;
+	}
+
+	public void setTipoDocumento(int tipoDocumento) {
+		this.tipoDocumento = tipoDocumento;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Perfil getPerfil() {
+		return perfil;
+	}
+
+	public void setPerfil(Perfil perfil) {
+		this.perfil = perfil;
+	}
+	
 }

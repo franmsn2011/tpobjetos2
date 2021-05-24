@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import objetos2.demo.entities.Usuario;
-import objetos2.demo.models.Login;
+import objetos2.demo.models.LoginModel;
 import objetos2.demo.models.UsuarioModel;
 import objetos2.demo.services.UsuarioService;
 
@@ -29,16 +29,16 @@ public class LoginController {
 
 	
 	//@GetMapping("/index")
-
+/*
 	//@PreAuthorize("hasRole('ROLE_ADMIN')")  // a modificar según rol de Administrador o Audotor
 	@GetMapping("/")
 	public String devolverformulario(Model model) {
-		model.addAttribute("login", new Login());
+		model.addAttribute("login", new LoginModel());
 		
 		return "login";
 	}
 	@PostMapping("/resultado")
-	public String resultado(@ModelAttribute("login") Login login, Model model) {
+	public String resultado(@ModelAttribute("login") LoginModel login, Model model) {
 		UsuarioModel usuarioModel = usuarioService.findByNombre(login.getNombre());
 		if(usuarioModel==null) {
 			model.addAttribute("exception", "Error no existe un usuario con ese nombre");
@@ -52,6 +52,7 @@ public class LoginController {
 		model.addAttribute("usuario", usuarioModel);
 		return "redirect:/usuario/home/"+usuarioModel.getIdUsuario();
 	}
+	*/
 	/*
 	@GetMapping("/res")
 	public String traerPersonas(Model model) {

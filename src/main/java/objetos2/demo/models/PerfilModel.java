@@ -1,20 +1,24 @@
 package objetos2.demo.models;
 
+import java.util.Set;
+
+
+import objetos2.demo.entities.Usuario;
 
 public class PerfilModel {
 	private int idPerfil;
 	
-
-	private String nombre;
+	private String nombrePerfil;
 	
+	private Set<Usuario> usuarios;
 
 	public PerfilModel() {}
 
 
-	public PerfilModel (int idPerfil, String nombre) {
+	public PerfilModel (int idPerfil, String nombrePerfil) {
 		super();
 		this.idPerfil = idPerfil;
-		this.nombre = nombre;
+		this.nombrePerfil = nombrePerfil;
 	}
 
 
@@ -28,12 +32,26 @@ public class PerfilModel {
 	}
 
 
-	public String getNombre() {
-		return nombre;
+	public String getNombrePerfil() {
+		return nombrePerfil;
 	}
 
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setNombrePerfil(String nombrePerfil) {
+		this.nombrePerfil = nombrePerfil;
 	}
+
+
+	public Set<Usuario> getUsuarios() {
+		return usuarios;
+	}
+
+
+	public void setUsuarios(Set<Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
+
+
+	
+	
 }

@@ -2,21 +2,19 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<title>login covid</title>
+		<title>UNLa</title>
 	</head>
 	<body>
 	    <!-- Page Content -->
 	    <div class="container">
 	      <div class="jumbotron">
+	      	<h1 class="display-5 alert alert-info">Logout Successfully.</h1>
 	        <h1 class="display-5">Login</h1>
 	        <form th:action="@{/usuario/loginprocess}" method="post">
 		      	<input type="text" name="nombreUsuario" id="nombreUsuario" placeholder="nombreUsuario" />
 		      	<input type="password" name="password" id="password" placeholder="Password" />
 		      	<input type="submit" />
 	      	</form>
-	      	<div th:if="${error != null}" class="alert alert-danger">
-		    	Invalid username or password.
-		    </div>
 	      </div>
 	    </div>
 	</body>

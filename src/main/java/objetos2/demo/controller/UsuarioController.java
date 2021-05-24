@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import objetos2.demo.models.UsuarioModel;
@@ -16,29 +17,32 @@ import objetos2.demo.services.UsuarioService;
 @Controller
 @RequestMapping("/usuario")
 public class UsuarioController {
-	private static final int NINGUN_EQUIPO = 15;
 
-	private static final String USUARIO_KEY = "usuario";
 
 	@Autowired
 	@Qualifier("usuarioService")
 	private UsuarioService usuarioService;
 
 	
-
-	//spring.jpa.hibernate.ddl-auto=update
-/*
-	@PostMapping("/seve")
-	public String seve(@Validated Usuario u, Model model) {
-		try {
-			UsuarioService.addJugador(u);
-		} catch (Exception e) {
-			model.addAttribute("exception", e.getMessage());
-			return "formUsuario";
-		}
-		return "redirect:/";
+	@GetMapping("/login")
+	public String login(Model model,
+						@RequestParam(name="error",required=false) String error,
+						@RequestParam(name="logout", required=false) String logout) {
+		model.addAttribute("error", error);
+		model.addAttribute("logout", logout);
+		return "login";
 	}
-	*/
+	
+	@GetMapping("/logout")
+	public String logout(Model model) {
+		return "logout";
+	}
+	
+	@GetMapping("/loginsuccess")
+	public String loginCheck() {
+		return "redirect:/usuario/index";
+	}
+
 	@GetMapping("/new")
 	public String create(Model model) {
 		model.addAttribute("usuario", new UsuarioModel());
@@ -58,6 +62,11 @@ public class UsuarioController {
 	@GetMapping("/home/{idUsuario}")
 	public String homeUsuario(@ModelAttribute("idUsuario") int idUsuario,Model model) {
 		model.addAttribute("usuario", usuarioService.findById(idUsuario));
+		return "homeUsuario";
+	}
+	@GetMapping("/index")
+	public String indexUsuario(/*@ModelAttribute("idUsuario") int idUsuario,*/Model model) {
+		//model.addAttribute("usuario", usuarioService.findById(idUsuario));
 		return "homeUsuario";
 	}
 	@GetMapping("/list")

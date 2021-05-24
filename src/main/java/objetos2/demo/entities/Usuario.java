@@ -4,9 +4,12 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -16,7 +19,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 
 @Entity
-@Table(name="usuario", uniqueConstraints=@UniqueConstraint(columnNames= {"role", "user_id"}))
+@Table(name="usuario", uniqueConstraints=@UniqueConstraint(columnNames= {"nombreUsuario", "idPerfil"}))
 public class Usuario {
 
 	@Id
@@ -31,7 +34,6 @@ public class Usuario {
 	
 	@Column(name="apellido")
 	private String apellido;
-	
 	
 	@Column(name="tipoDocumento")
 	private int tipoDocumento;
@@ -59,7 +61,8 @@ public class Usuario {
 	@UpdateTimestamp
 	private LocalDateTime updatedAt;
 	
-	@Column(name="perfil", nullable=false, length=100)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="idPerfil", nullable=false)
 	private Perfil perfil;
 
 	public Usuario() {}
@@ -225,6 +228,7 @@ public class Usuario {
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
+	
 	
 	
 }

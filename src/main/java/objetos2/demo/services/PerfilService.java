@@ -61,8 +61,8 @@ public class PerfilService implements IPerfilService {
 	@Override
 	public PerfilModel findByNombre(String name) {
 		PerfilModel u= null;
-		if(perfilRepository.findByNombre(name)!=null){
-			u=perfilConverter.entityToModel(perfilRepository.findByNombre(name));
+		if(perfilRepository.findByNombrePerfil(name)!=null){
+			u=perfilConverter.entityToModel(perfilRepository.findByNombrePerfil(name));
 		}
 		return u;
 	}

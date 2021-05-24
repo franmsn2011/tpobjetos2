@@ -13,7 +13,7 @@ public interface  IUsuarioService {
 	
 	public UsuarioModel findById(int id);
 	
-	public UsuarioModel findByNombre(String nombre);
+	public UsuarioModel findByNombreUsuario(String nombre);
 	
 	public UsuarioModel insertOrUpdate(UsuarioModel usuarioModel);
 	
@@ -22,5 +22,5 @@ public interface  IUsuarioService {
 	public List<UsuarioModel> findByDegreeNombre(String degreeName);
 	public boolean validoPassword(UsuarioModel usuario,String password); 
 	public boolean darDeBaja(int idUsuario);
-	public UserDetails loadUserByNombreUsuario(String nombreUsuario) throws UsernameNotFoundException;
+	public UserDetails loadUserByUsername(String nombreUsuario) throws UsernameNotFoundException;
 }
