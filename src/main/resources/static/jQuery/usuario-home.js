@@ -1,5 +1,6 @@
 $(function() { 		var perfil = $("#idPerfil").html();
-
+});
+/*
 	if (perfil == "1") {
 		console.log("es administrador");
 		$("#idEsAdmin").show();
@@ -7,6 +8,7 @@ $(function() { 		var perfil = $("#idPerfil").html();
 		$("#idEsAdmin").hide();
 		console.log("No es administrador");
 	}	});
+	*/
 /*
 function esAdmin(){
 	.html(
@@ -18,8 +20,8 @@ function esAdmin(){
 	'<br />' + 
 	'<a th:href="@{/usuario/new/}" class="btn btn-info">agregar usuario nuevo</a>'
 	);
-};*/
-	/*
+};
+	
 $(document).ready(function() {
 	$(window).on("load",function(){
 		var perfil = $("#idPerfi").val();

@@ -19,22 +19,27 @@
 	<table class="table table-striped bg-primary text-white">
 		<thead>
 			<tr>
-				<th>idUsuario</th>
 				<th>Nombre</th>
+				<th>Nombre de Usuario</th>
+				
 				<th>Apellido</th>
-				<th>Edad</th>
-				<th>nroDocumento</th>
+				<th>Email</th>
+				<th>tipo de Documento</th>
+				<th>numero de Documento</th>
 				<th>tipoUsuario</th>
 			</tr>
 		</thead>
 		<tbody th:each="usuarioModel : ${usuarios}" class="table-striped">
 			<tr>
-				<th th:text="${usuarioModel.idUsuario}"></th>
 				<th th:text="${usuarioModel.nombre}"></th>
+				<th th:text="${usuarioModel.nombreUsuario}"></th>
+				
 				<th th:text="${usuarioModel.apellido}"></th>
-				<th th:text="${usuarioModel.edad}"></th>
+				<th th:text="${usuarioModel.email}"></th>
+				<th th:text="${usuarioModel.tipoDocumento}"></th>
 				<th th:text="${usuarioModel.nroDocumento}"></th>
 				<th th:text="${usuarioModel.tipoUsuario}"></th>
+				
 				<th><a th:href="@{/usuario/editar/}+${usuarioModel.idUsuario}"
 					class="btn btn-warning">Editar</a> <a
 					th:href="@{/usuario/eliminar/}+${usuarioModel.idUsuario}"
@@ -49,7 +54,7 @@
 
 
 	<div>
-		<a class="btn btn-success  btn-lg btn-block" th:href="@{/}">Menu principal</a>
+		<a class="btn btn-success  btn-lg btn-block" th:href="@{/usuario/index}">Menu principal</a>
 		<a class="btn btn-primary btn-lg btn-block" th:href="@{/usuario/new}">Cargar nuevo usuario</a>
 
 	</div>

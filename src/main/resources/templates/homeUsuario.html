@@ -27,7 +27,7 @@
 	<div class="d-grid gap-2 col-6 mx-auto">
 
 		<h1 class="display-1 bg-primary">Home Usuario</h1>
-		<h2>Bienvenido <span th:text="${usuario.nombre}"> a ingresado</span> </h2>
+		<h2>Bienvenido <span th:text="${usuario.nombreUsuario}"> a ingresado</span> </h2>
 		<h3 id="idPerfil" th:text="${usuario.tipoUsuario}"> a</h3>
 		<div id="idEsAdmin">
 			<a th:href="@{/perfil/list}" class="btn btn-primary" id="id1">lista de perfiles</a> 

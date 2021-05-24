@@ -45,9 +45,9 @@
 						<div class="mb-3 row form-group" >
 							<label class="col-sm-3 col-form-label" for="idNombre">Nombre de perfil</label>
 							<div class="col-sm-9" >
-								<input placeholder="Ingrese el nombre del pergil" th:field="*{nombre}" type="text" class="form-control"
-									id="idNombre">
-									<div id="idDivNombre"> </div>
+								<input placeholder="Ingrese el nombre del perfil" th:field="*{nombrePerfil}" type="text" class="form-control"
+									id="idNombrePerfil">
+									<div id="idDivNombrePerfil"> </div>
 							</div>
 						</div>
 						
@@ -63,12 +63,9 @@
 			</form>
 		</div>
 	</div>
-	<div th:if="${segunda}">
-		<a href="#" id="backLink2" class="btn btn-success" >Atras</a>
-	</div>	
-	<div th:unless="${segunda}">
-		<a href="#" id="backLink" class="btn btn-success" >Atras</a>
-	</div>
+
+		<a class="btn btn-success  btn-lg btn-block" th:href="@{/usuario/index}">Menu principal</a>
+	
 	
 <!--<a href="#" id="backLink2" class="btn btn-success" >Atras</a>  -->	
 </body>

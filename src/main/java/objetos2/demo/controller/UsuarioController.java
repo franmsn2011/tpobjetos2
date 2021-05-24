@@ -72,9 +72,12 @@ public class UsuarioController {
 	@GetMapping("/index")
 	public String indexUsuario(/*@ModelAttribute("idUsuario") int idUsuario,*/Model model) {
 		//HashMap<String, String>	has= SecurityContextHolder.getContext().getAuthentication().getPrincipal().getClass();
-		User usuario = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String admin= SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+		String[] name=admin.substring(61, 80).split(",");
+		UsuarioModel usuario = usuarioService.findByNombreUsuario(name[0]);
+		//User usuario = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		//usuario.get
-		//model.addAttribute("usuario", usuario);
+		model.addAttribute("usuario", usuario);
 		return "homeUsuario";
 	}
 	@GetMapping("/list")
