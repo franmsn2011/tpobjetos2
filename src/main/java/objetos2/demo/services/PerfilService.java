@@ -1,6 +1,7 @@
 package objetos2.demo.services;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,16 @@ public class PerfilService implements IPerfilService {
 	public List<Perfil> getAll() {
 		return perfilRepository.findAll();
 	}
+	@Override
+	public List<Perfil> getAllPerfilSolo() {
+		List<Perfil> list = perfilRepository.findAll();
+		List<Perfil> l = new ArrayList<>();
+		for (int i = 0; i < list.size(); i++) {
+			l.add(new Perfil(list.get(i).getIdPerfil(), list.get(i).getNombrePerfil()));
+		}
+		return l;
+	}
+
 
 	@Override
 	public PerfilModel insertOrUpdate(PerfilModel perfilModel) {

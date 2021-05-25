@@ -26,7 +26,7 @@
 				<th>Email</th>
 				<th>tipo de Documento</th>
 				<th>numero de Documento</th>
-				<th>tipoUsuario</th>
+				<th>Perfil</th>
 			</tr>
 		</thead>
 		<tbody th:each="usuarioModel : ${usuarios}" class="table-striped">
@@ -38,7 +38,7 @@
 				<th th:text="${usuarioModel.email}"></th>
 				<th th:text="${usuarioModel.tipoDocumento}"></th>
 				<th th:text="${usuarioModel.nroDocumento}"></th>
-				<th th:text="${usuarioModel.tipoUsuario}"></th>
+				<th th:text="${usuarioModel.perfil.nombrePerfil}"></th>
 				
 				<th><a th:href="@{/usuario/editar/}+${usuarioModel.idUsuario}"
 					class="btn btn-warning">Editar</a> <a

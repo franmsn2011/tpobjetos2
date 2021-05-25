@@ -19,6 +19,6 @@ public interface IPerfilService  {
 	public PerfilModel insertOrUpdate(PerfilModel usuarioModel);
 	
 	public boolean remove(int id);
-	
+	public List<Perfil> getAllPerfilSolo();
 	public List<PerfilModel> findByDegreeNombre(String degreeName);
 }

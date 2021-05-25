@@ -18,7 +18,7 @@ public interface  IUsuarioService {
 	public UsuarioModel insertOrUpdate(UsuarioModel usuarioModel);
 	
 	public boolean remove(int id);
-	
+	public List<Usuario> getAllPerfiles();
 	public List<UsuarioModel> findByDegreeNombre(String degreeName);
 	public boolean validoPassword(UsuarioModel usuario,String password); 
 	public boolean darDeBaja(int idUsuario);

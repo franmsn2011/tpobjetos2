@@ -25,7 +25,7 @@ public class PerfilControllerRest {
 	@RequestMapping(value = "/perfi", method = RequestMethod.GET)
 	public String listAllperfiles() {
 		JSONObject myObject = new JSONObject();
-		myObject.put("perfiles", perfilService.getAll());
+		myObject.put("perfiles", perfilService.getAllPerfilSolo());
 		return myObject.toString();
 	}
 

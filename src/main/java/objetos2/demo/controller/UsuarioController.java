@@ -55,14 +55,15 @@ public class UsuarioController {
 	}
 	
 	@PostMapping("/seve")
-	public String create(@ModelAttribute("usuario") UsuarioModel usuarioModel) {
+	public String create(@ModelAttribute("usuario") UsuarioModel usuarioModel,Model model) {
 		try {
 			usuarioService.insertOrUpdate(usuarioModel);
 			
 		} catch (Exception e) {
 			return "redirect:/usuario/new";
 		}
-		return "redirect:/";
+		model.addAttribute("confirmacion", "Operacion sobre el Usuario exitosa");
+		return "formUsuario";
 	}
 	@GetMapping("/home/{idUsuario}")
 	public String homeUsuario(@ModelAttribute("idUsuario") int idUsuario,Model model) {

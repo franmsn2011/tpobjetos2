@@ -52,7 +52,6 @@ public class PerfilController {
 			return "redirect:/perfil/new";
 		}
 		model.addAttribute("confirmacion", "Operacion sobre el perfil exitosa");
-		model.addAttribute("segunda", true);
 		return "formPerfil";
 	}
 	@GetMapping("/home/{idPerfil}")

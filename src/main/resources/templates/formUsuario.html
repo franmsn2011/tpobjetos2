@@ -30,17 +30,28 @@
 				<div class="card">
 					<div class="card-header">
 						<h3>Usuario</h3>
+						<h4 class="text-success" id="idConfirmacion"th:text="${confirmacion}"></h4>
+				
 						<h4 class="text-danger" id="idExc"th:text="${exception}"></h4>
 					</div>
+					
 					<div class="card-body">
+						<div class="mb-3 row form-group">
+							<label for="idUsuario" class="col-sm-3 col-form-label">Id</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control"  readonly="readonly" th:field="*{idUsuario}"
+									id="idUsuario">
+								<div id="idDivIdPerfil"> </div>
+							</div>
+						</div>	
 						<div class="mb-3 row form-group" >
-							<label class="col-sm-3 col-form-label" for="idUsuario">Nombre de usuario</label>
+							<label class="col-sm-3 col-form-label" for="idNombreUsuario">Nombre de usuario</label>
 							<div class="col-sm-9" >
 								<input placeholder="Ingrese su nombre de usuario" th:field="*{nombreUsuario}" type="text" class="form-control"
 									id="idNombreUsuario">
-									<div id="idDivNombreUsuario"> </div>
 							</div>
-						</div>
+						</div>	
+														
 						<div class="mb-3 row form-group" >
 							<label class="col-sm-3 col-form-label" for="idNombre">Nombre</label>
 							<div class="col-sm-9" >
@@ -102,11 +113,11 @@
 						<div class="mb-3 row form-group"  >
 							<label for="idPerfil" class="col-sm-3 col-form-label">Perfil</label>
 							<div class="col-sm-9">
-								<select id="idPerfil" type="number" th:field="*{tipoUsuario}"
+								<select id="idPerfil" type="number" th:field="*{perfil.idPerfil}"
 									class="form-select form-select-lg mb-3 ">
 								</select>
 							</div>
-							<input  th:field="*{tipoUsuario}" type="number" class="form-control d-none"
+							<input  th:field="*{perfil.idPerfil}" type="number" class="form-control d-none"
 									id="idPerfi">
 						</div>
 						

@@ -12,10 +12,10 @@ $(document).ready(function() {
 		var perfil = $("#idPerfi").val();
 		for (a in objE.perfiles) { 
 			if(objE.perfiles[a].idPerfil == perfil){
-					datossE.innerHTML += `<option selected value='${objE.perfiles[a].idPerfil}'>${objE.perfiles[a].nombre}</option>`;
+					datossE.innerHTML += `<option selected value='${objE.perfiles[a].idPerfil}'>${objE.perfiles[a].nombrePerfil}</option>`;
 			
 			}else{
-			datossE.innerHTML += `<option value='${objE.perfiles[a].idPerfil}'>${objE.perfiles[a].nombre}</option>`;
+			datossE.innerHTML += `<option value='${objE.perfiles[a].idPerfil}'>${objE.perfiles[a].nombrePerfil}</option>`;
 		}}
 	});
 });

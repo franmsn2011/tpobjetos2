@@ -41,8 +41,28 @@ public class UsuarioService implements IUsuarioService ,UserDetailsService {
 	
 	@Override
 	public List<Usuario> getAll() {
-		return usuarioRepository.findAll();
+		List<Usuario> list = usuarioRepository.findAll();
+		List<Usuario> l = new ArrayList<>();
+		for (int i = 0; i < list.size(); i++) {
+			if(list.get(i).isActivo()) {
+				l.add(list.get(i));
+			}
+		}
+		return l;
 	}
+	@Override
+	public List<Usuario> getAllPerfiles() {
+		List<Usuario> list = usuarioRepository.findAll();
+		List<Usuario> l = new ArrayList<>();
+		for (int i = 0; i < list.size(); i++) {
+			Usuario usuario= list.get(i);
+			usuario.setPerfil(perfilRepository.findByIdPerfil(usuario.getTipoUsuario()));
+			l.add(usuario);
+		}
+		return l;
+	}
+	
+	
 	@Override
 	public UserDetails loadUserByUsername(String nombreUsuario) throws UsernameNotFoundException {
 		objetos2.demo.entities.Usuario user = usuarioRepository.findByNombreUsuario(nombreUsuario);
@@ -66,6 +86,8 @@ public class UsuarioService implements IUsuarioService ,UserDetailsService {
 	@Override
 	public UsuarioModel insertOrUpdate(UsuarioModel usuarioModel) {
 		try {
+			usuarioModel.setTipoUsuario(usuarioModel.getPerfil().getIdPerfil());
+			usuarioModel.setActivo(true);
 			Usuario usuario= usuarioRepository.save(usuarioConverter.modelToEntity(usuarioModel));
 			return usuarioConverter.entityToModel(usuario);
 		} catch (Exception e) {
