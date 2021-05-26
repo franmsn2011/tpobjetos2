@@ -1,10 +1,8 @@
 package objetos2.demo.controller;
 
-import java.util.HashMap;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,11 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import objetos2.demo.entities.Usuario;
+import objetos2.demo.helpers.ViewRouteHelper;
 import objetos2.demo.models.UsuarioModel;
 import objetos2.demo.services.UsuarioService;
 
 @Controller
+//@PreAuthorize("hasRole('administrador')")
 @RequestMapping("/usuario")
 public class UsuarioController {
 
@@ -35,12 +34,12 @@ public class UsuarioController {
 						@RequestParam(name="logout", required=false) String logout) {
 		model.addAttribute("error", error);
 		model.addAttribute("logout", logout);
-		return "login";
+		return ViewRouteHelper.LOGIN;
 	}
 	
 	@GetMapping("/logout")
 	public String logout(Model model) {
-		return "logout";
+		return ViewRouteHelper.LOGOUT;
 	}
 	
 	@GetMapping("/loginsuccess")
@@ -51,7 +50,7 @@ public class UsuarioController {
 	@GetMapping("/new")
 	public String create(Model model) {
 		model.addAttribute("usuario", new UsuarioModel());
-		return "formUsuario";
+		return ViewRouteHelper.NEWUSUARIO;
 	}
 	
 	@PostMapping("/seve")
@@ -63,13 +62,15 @@ public class UsuarioController {
 			return "redirect:/usuario/new";
 		}
 		model.addAttribute("confirmacion", "Operacion sobre el Usuario exitosa");
-		return "formUsuario";
+		return ViewRouteHelper.NEWUSUARIO;
 	}
+	
 	@GetMapping("/home/{idUsuario}")
 	public String homeUsuario(@ModelAttribute("idUsuario") int idUsuario,Model model) {
 		model.addAttribute("usuario", usuarioService.findById(idUsuario));
-		return "homeUsuario";
+		return ViewRouteHelper.HOMEU;
 	}
+	
 	@GetMapping("/index")
 	public String indexUsuario(/*@ModelAttribute("idUsuario") int idUsuario,*/Model model) {
 		//HashMap<String, String>	has= SecurityContextHolder.getContext().getAuthentication().getPrincipal().getClass();
@@ -79,11 +80,12 @@ public class UsuarioController {
 		//User usuario = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		//usuario.get
 		model.addAttribute("usuario", usuario);
-		return "homeUsuario";
+		return ViewRouteHelper.HOMEU;
 	}
+	
 	@GetMapping("/list")
 	public ModelAndView listAllJugador() {
-		ModelAndView mav = new ModelAndView("listUsuario");
+		ModelAndView mav = new ModelAndView(ViewRouteHelper.LISTUSUARIO);
 		mav.addObject("usuarios", usuarioService.getAll());
 		//mav.addObject("posicion", posicionService);
 		return mav;
@@ -94,7 +96,7 @@ public class UsuarioController {
 	public String editar(@ModelAttribute("idUsuario") int idUsuario, Model model) {
 		UsuarioModel usuario= usuarioService.findById(idUsuario);
 		model.addAttribute("usuario", usuario);
-		return "formUsuario";
+		return ViewRouteHelper.NEWUSUARIO;
 	}
 	
 	@GetMapping("/eliminar/{idUsuario}")
